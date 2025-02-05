@@ -1,0 +1,69 @@
+title: Questions of Ideology 2
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: ideology_timer = 0
+on-arrival: month_actions += 1; old_ideology = ideology; ideology_timer = 18
+card-image: img/arbeiterbew.jpg
+max-visits: 3
+
+= Questions of Ideology
+
+The KPD is at a crossroads, with different factions pushing for ideological leadership. What path should we take?
+
+[? if ideology != 0 : We have previously chosen a [+ ideology +] ideology. Changing it will likely have drawbacks. ?]
+
+- @revolutionary: The proletarian revolution and the dictatorship of the proletariat must remain our goals.
+- @soviet_marxism: The Marxism-Leninism of the Soviet Union is the correct path for our movement.
+- @workers_front: We should work within the existing structures to build a broad workers' alliance.
+- @united_front: We must collaborate with other leftist forces to resist reaction and fascism.
+- @easy_discard
+
+@revolutionary
+on-arrival: {!
+if (Q.ideology && Q.ideology != "revolutionary") {
+    Q.changed = 1;
+}
+!}
+go-to: changed if changed = 1
+on-departure: ideology = "revolutionary"; revolutionary_strength += 10; bourgeois_resistance += 2; party_unity -= 5; kpd_relation += 5; spd_relation -= 5
+
+The radical faction insists on an immediate push for proletarian revolution, rejecting collaboration with reformists.
+
+@soviet_marxism
+on-arrival: {!
+if (Q.ideology && Q.ideology != "soviet") {
+    Q.changed = 1;
+}
+!}
+go-to: changed if changed = 1
+on-departure: ideology = "soviet"; soviet_loyalty += 10; moscow_support += 1; party_unity -= 3; nationalist_tensions += 2
+
+The pro-Soviet faction supports strict adherence to Marxism-Leninism and alignment with the Communist International.
+
+@workers_front
+on-arrival: {!
+if (Q.ideology && Q.ideology != "workers_front") {
+    Q.changed = 1;
+}
+!}
+go-to: changed if changed = 1
+on-departure: ideology = "workers_front"; workers_front_strength += 10; trade_union_support += 1; kpd_relation += 3; spd_relation += 2; bourgeois_resistance -= 1
+
+The pragmatic faction advocates for engaging with unions and mass organizations to strengthen workers' power.
+
+@united_front
+on-arrival: {!
+if (Q.ideology && Q.ideology != "united_front") {
+    Q.changed = 1;
+}
+!}
+go-to: changed if changed = 1
+on-departure: ideology = "united_front"; united_front_strength += 10; fascist_resistance += 2; spd_relation += 5; kpd_relation -= 3; moscow_support -= 1
+
+This faction pushes for alliances with other leftist groups, including social democrats, to fight reactionary forces.
+
+@changed
+on-arrival: revolutionary_dissent += 5; soviet_dissent += 5; workers_front_dissent += 5; united_front_dissent += 5
+
+We have shifted our ideological course. Some within the party are uneasy.

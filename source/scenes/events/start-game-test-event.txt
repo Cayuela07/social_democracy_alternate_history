@@ -2,7 +2,7 @@ title: Game Start Test
 subtitle: Testing if events work properly
 new-page: true
 tags: event
-view-if: year = 1928 and month = 1
+view-if: year = 1928 and month = 7
 priority: 10
 max-visits: 1
 on-arrival: {!

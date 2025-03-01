@@ -1,0 +1,30 @@
+title: Game Start Test
+subtitle: Testing if events work properly
+new-page: true
+tags: event
+view-if: year = 1928 and month = 1
+priority: 10
+max-visits: 1
+on-arrival: {!
+// Add a test variable to confirm the event fired
+Q.test_event_fired = 1;
+!}
+
+= Game Start Test
+
+Welcome to Germany, 1928. This event is a test to confirm that the event system is working properly. If you're seeing this message, it means the event handler is processing events correctly.
+
+The Weimar Republic faces many challenges in the years ahead. Economic uncertainty, political instability, and the rise of extremist movements all threaten the young democracy.
+
+- @continue: Continue with the game.
+- @test_action: Test an action response.
+
+@continue
+on-arrival: test_continue = 1
+
+You acknowledge the test message. The game will now proceed normally.
+
+@test_action
+on-arrival: test_action_taken = 1
+
+This action confirms that the choice system is working correctly. You can now proceed with the game.
